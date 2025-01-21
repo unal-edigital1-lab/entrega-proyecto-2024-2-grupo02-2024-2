@@ -20,7 +20,7 @@ Este proyecto implementa una controlador diguital de luz de trafico usando una F
 ---
 
 ## *Estructura del Proyecto*
-
+```
 TrafficLight-FPGA/
 ├── README.md          # Descripción general e instrucciones del proyecto
 ├── src/               # Archivos fuente en Verilog
@@ -30,7 +30,7 @@ TrafficLight-FPGA/
 │   ├── testbench.v      # Testbench para simulación
 │   └── waveform.vcd     # Salida de simulación
 └── LICENSE            # Licencia del proyecto
-
+```
 ### Modelo de Caja Negra
 El controlador de semáforo se implementa como un módulo de caja negra con las siguientes entradas y salidas:
 
