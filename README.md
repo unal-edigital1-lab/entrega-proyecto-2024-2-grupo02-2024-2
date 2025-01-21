@@ -31,3 +31,59 @@ TrafficLight-FPGA/
 │   ├── testbench.v      # Testbench para simulación
 │   └── waveform.vcd     # Salida de simulación
 └── LICENSE            # Licencia del proyecto
+[14:51, 21/1/2025] +57 310 7363996: ### Modelo de Caja Negra
+El controlador de semáforo se implementa como un módulo de caja negra con las siguientes entradas y salidas:
+
+- *Entradas:*
+  - clk: Señal de reloj (50 MHz).
+  - reset: Botón de reinicio para restablecer el semáforo al estado inicial.
+
+- *Salidas:*
+  - red: Controla el LED rojo.
+  - yellow: Controla el LED amarillo.
+  - green: Controla el LED verde.
+
+*Diagrama de Caja Negra:*
+
+```plaintext
+     +---------------------+
+     |  Traffic Light FSM  |
+     |                     |
+clk  --->                 ---> red
+reset --->                 ---> yellow
+                          ---> green
+     +---------------------+
+[14:52, 21/1/2025] +57 310 7363996: ### Descripción funcional del sistema
+El semáforo opera en un ciclo de tres estados:
+1. *Estado Rojo:* La luz roja está activa durante 5 segundos, indicando que el tráfico debe detenerse.
+2. *Estado Verde:* La luz verde está activa durante 5 segundos, permitiendo que el tráfico avance.
+3. *Estado Amarillo:* La luz amarilla está activa durante 2 segundos, indicando la transición al estado rojo.
+
+La transición entre estados se gestiona mediante una máquina de estados finita (FSM) sincronizada con un reloj de 50 MHz del FPGA. Cada estado tiene un temporizador implementado con contadores para definir su duración.
+[14:52, 21/1/2025] +57 310 7363996: ### Diagrama de Bloques Funcionales
+```plaintext
+  +---------+       +--------------+       +----------------+
+  |  Clock  | ----> |   FSM Logic  | ----> |  LED Drivers   |
+  +---------+       +--------------+       +----------------+
+                         ^                         ^
+                         |                         |
+                   Reset Button               Output LEDs
+[14:52, 21/1/2025] +57 310 7363996: #### *b. Diagrama de conexión física*
+Describe cómo se conectan los pines del FPGA a los LEDs. Por ejemplo:
+
+markdown
+### Diagrama de Conexión Física
+- **LED Rojo:** Conectado al pin 12 del FPGA.
+- **LED Amarillo:** Conectado al pin 13 del FPGA.
+- **LED Verde:** Conectado al pin 14 del FPGA.
+
+**Conexiones en el FPGA:**
+
+plaintext
+  FPGA Board
+  +------------------+
+  |                  |
+  |   PIN_12 ------> Red LED
+  |   PIN_13 ------> Yellow LED
+  |   PIN_14 ------> Green LED
+  +------------------+
