@@ -45,7 +45,6 @@ El controlador de semáforo se implementa como un módulo de caja negra con las 
 
 *Diagrama de Caja Negra:*
 
-```plaintext
      +---------------------+
      |  Traffic Light FSM  |
      |                     |
@@ -60,8 +59,8 @@ El semáforo opera en un ciclo de tres estados:
 3. *Estado Amarillo:* La luz amarilla está activa durante 2 segundos, indicando la transición al estado rojo.
 
 La transición entre estados se gestiona mediante una máquina de estados finita (FSM) sincronizada con un reloj de 50 MHz del FPGA. Cada estado tiene un temporizador implementado con contadores para definir su duración.
-[14:52, 21/1/2025] +57 310 7363996: ### Diagrama de Bloques Funcionales
-```plaintext
+### Diagrama de Bloques Funcionales
+
   +---------+       +--------------+       +----------------+
   |  Clock  | ----> |   FSM Logic  | ----> |  LED Drivers   |
   +---------+       +--------------+       +----------------+
