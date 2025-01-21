@@ -68,10 +68,9 @@ La transición entre estados se gestiona mediante una máquina de estados finita
                          ^                         ^
                          |                         |
                    Reset Button               Output LEDs
-[14:52, 21/1/2025] +57 310 7363996: #### *b. Diagrama de conexión física*
+#### *b. Diagrama de conexión física*
 Describe cómo se conectan los pines del FPGA a los LEDs. Por ejemplo:
 
-markdown
 ### Diagrama de Conexión Física
 - **LED Rojo:** Conectado al pin 12 del FPGA.
 - **LED Amarillo:** Conectado al pin 13 del FPGA.
