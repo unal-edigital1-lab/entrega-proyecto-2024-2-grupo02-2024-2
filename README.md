@@ -15,8 +15,7 @@ Este proyecto implementa una controlador diguital de luz de trafico usando una F
   - Amarillo: Preparar para el cambio.
   - Verde: Permitir el paso.
 - *Temporizadores ajustables* para la duración de cada estado.
-- Diseñado para tarjetas FPGA de Intel/Altera.
-- Totalmente probado con simulaciones e implementación en hardware.
+- Diseñado para la tarjeta FPGA Cyclone IV E.
 
 ---
 
@@ -31,6 +30,7 @@ TrafficLight-FPGA/
 │   ├── testbench.v      # Testbench para simulación
 │   └── waveform.vcd     # Salida de simulación
 └── LICENSE            # Licencia del proyecto
+plaintext
 ### Modelo de Caja Negra
 El controlador de semáforo se implementa como un módulo de caja negra con las siguientes entradas y salidas:
 
@@ -78,7 +78,7 @@ Describe cómo se conectan los pines del FPGA a los LEDs. Por ejemplo:
 
 **Conexiones en el FPGA:**
 
-plaintext
+
   FPGA Board
   +------------------+
   |                  |
