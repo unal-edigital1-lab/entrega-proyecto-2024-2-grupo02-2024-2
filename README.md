@@ -44,7 +44,7 @@ El controlador de semáforo se implementa como un módulo de caja negra con las 
   - green: Controla el LED verde.
 
 *Diagrama de Caja Negra:*
-
+```
      +---------------------+
      |  Traffic Light FSM  |
      |                     |
@@ -52,6 +52,7 @@ clk  --->                 ---> red
 reset --->                 ---> yellow
                           ---> green
      +---------------------+
+```
 ### Descripción funcional del sistema
 El semáforo opera en un ciclo de tres estados:
 1. *Estado Rojo:* La luz roja está activa durante 5 segundos, indicando que el tráfico debe detenerse.
@@ -60,13 +61,14 @@ El semáforo opera en un ciclo de tres estados:
 
 La transición entre estados se gestiona mediante una máquina de estados finita (FSM) sincronizada con un reloj de 50 MHz del FPGA. Cada estado tiene un temporizador implementado con contadores para definir su duración.
 ### Diagrama de Bloques Funcionales
-
+```
   +---------+       +--------------+       +----------------+
   |  Clock  | ----> |   FSM Logic  | ----> |  LED Drivers   |
   +---------+       +--------------+       +----------------+
                          ^                         ^
                          |                         |
                    Reset Button               Output LEDs
+```
 #### *b. Diagrama de conexión física*
 Describe cómo se conectan los pines del FPGA a los LEDs. Por ejemplo:
 
@@ -77,7 +79,7 @@ Describe cómo se conectan los pines del FPGA a los LEDs. Por ejemplo:
 
 **Conexiones en el FPGA:**
 
-
+```
   FPGA Board
   +------------------+
   |                  |
@@ -85,3 +87,4 @@ Describe cómo se conectan los pines del FPGA a los LEDs. Por ejemplo:
   |   PIN_13 ------> Yellow LED
   |   PIN_14 ------> Green LED
   +------------------+
+```
