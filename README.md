@@ -31,7 +31,7 @@ TrafficLight-FPGA/
 │   ├── testbench.v      # Testbench para simulación
 │   └── waveform.vcd     # Salida de simulación
 └── LICENSE            # Licencia del proyecto
-[14:51, 21/1/2025] +57 310 7363996: ### Modelo de Caja Negra
+### Modelo de Caja Negra
 El controlador de semáforo se implementa como un módulo de caja negra con las siguientes entradas y salidas:
 
 - *Entradas:*
@@ -53,7 +53,7 @@ clk  --->                 ---> red
 reset --->                 ---> yellow
                           ---> green
      +---------------------+
-[14:52, 21/1/2025] +57 310 7363996: ### Descripción funcional del sistema
+### Descripción funcional del sistema
 El semáforo opera en un ciclo de tres estados:
 1. *Estado Rojo:* La luz roja está activa durante 5 segundos, indicando que el tráfico debe detenerse.
 2. *Estado Verde:* La luz verde está activa durante 5 segundos, permitiendo que el tráfico avance.
