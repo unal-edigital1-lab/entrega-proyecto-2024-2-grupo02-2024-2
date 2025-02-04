@@ -1,90 +1,113 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=17798927&assignment_repo_type=AssignmentRepo)
-# Entrega 1 del proyecto WP01
-- Paula Ruiz
-- Diego Vitoviz
-- Duvan Tique
-## Semáforo de 3 luces
-Este proyecto implementa una controlador diguital de luz de trafico usando una FPGA y lenguaje HDL. El diseño simula un trafico de luz básico con tres estados (**Rojo**,**Amarillo**,**Verde**) usando una maquina de estados finitos (FMS) y un reloj.
+# Especificación de Diseño del Proyecto Planta Virtual en FPGA
+  -Diego Vitoviz
+  -Paula Diaz
+  -Duvan Tique
 
-## Objetivos:
-- Diseñar e implementar un controlador de trafico de luz que opere en ciclos definidos usando la FPGA, demostrando el control de la base del estado  y la funcionalidad de la temporización.
+## 1. Introducción
 
-## *Características del Proyecto*
-- *Operación en tres estados:*
-  - Rojo: Detener el tráfico.
-  - Amarillo: Preparar para el cambio.
-  - Verde: Permitir el paso.
-- *Temporizadores ajustables* para la duración de cada estado.
-- Diseñado para la tarjeta FPGA Cyclone IV E.
+### 1.1 Objetivo
 
----
+Desarrollar un sistema de Planta Virtual en FPGA que simule el cuidado de una planta digital. Se implementará una lógica de estados para gestionar las necesidades de la planta y se permitirá la interacción mediante botones y sensores básicos.
 
-## *Estructura del Proyecto*
-```
-TrafficLight-FPGA/
-├── README.md          # Descripción general e instrucciones del proyecto
-├── src/               # Archivos fuente en Verilog
-│   ├── Traffic_Light.v  # Código del controlador de semáforo
-│   └── constraints.qsf  # Archivo de asignación de pines
-├── simulations/       # Testbench y resultados de simulación
-│   ├── testbench.v      # Testbench para simulación
-│   └── waveform.vcd     # Salida de simulación
-└── LICENSE            # Licencia del proyecto
-```
-### Modelo de Caja Negra
-El controlador de semáforo se implementa como un módulo de caja negra con las siguientes entradas y salidas:
+### 1.2 Delimitaciones
 
-- *Entradas:*
-  - clk: Señal de reloj (50 MHz).
-  - reset: Botón de reinicio para restablecer el semáforo al estado inicial.
+El proyecto se enfocará en:
 
-- *Salidas:*
-  - red: Controla el LED rojo.
-  - yellow: Controla el LED amarillo.
-  - green: Controla el LED verde.
+- Uso de botones físicos para la interacción.
+- Inclusión de al menos un sensor para interacción avanzada.
+- Representación del estado de la planta mediante una matriz de LED o display sencillo.
+- Implementación en FPGA Cyclone IV usando Verilog.
 
-*Diagrama de Caja Negra:*
-```
-     +---------------------+
-     |  Traffic Light FSM  |
-     |                     |
-clk  --->                 ---> red
-reset --->                 ---> yellow
-                          ---> green
-     +---------------------+
-```
-### Descripción funcional del sistema
-El semáforo opera en un ciclo de tres estados:
-1. *Estado Rojo:* La luz roja está activa durante 5 segundos, indicando que el tráfico debe detenerse.
-2. *Estado Verde:* La luz verde está activa durante 5 segundos, permitiendo que el tráfico avance.
-3. *Estado Amarillo:* La luz amarilla está activa durante 2 segundos, indicando la transición al estado rojo.
+## 2. Descripción General del Sistema
 
-La transición entre estados se gestiona mediante una máquina de estados finita (FSM) sincronizada con un reloj de 50 MHz del FPGA. Cada estado tiene un temporizador implementado con contadores para definir su duración.
-### Diagrama de Bloques Funcionales
-```
-  +---------+       +--------------+       +----------------+
-  |  Clock  | ----> |   FSM Logic  | ----> |  LED Drivers   |
-  +---------+       +--------------+       +----------------+
-                         ^                         ^
-                         |                         |
-                   Reset Button               Output LEDs
-```
-#### *b. Diagrama de conexión física*
-Describe cómo se conectan los pines del FPGA a los LEDs. Por ejemplo:
+### 2.1 Contexto del Sistema
 
-### Diagrama de Conexión Física
-- **LED Rojo:** Conectado al pin 12 del FPGA.
-- **LED Amarillo:** Conectado al pin 13 del FPGA.
-- **LED Verde:** Conectado al pin 14 del FPGA.
+El sistema de Planta Virtual en FPGA simula el crecimiento y necesidades de una planta utilizando máquinas de estado finito para gestionar su desarrollo y bienestar.
 
-**Conexiones en el FPGA:**
+### 2.2 Funcionalidad Principal
 
-```
-  FPGA Board
-  +------------------+
-  |                  |
-  |   PIN_12 ------> Red LED
-  |   PIN_13 ------> Yellow LED
-  |   PIN_14 ------> Green LED
-  +------------------+
-```
+El usuario podrá interactuar con la planta mediante botones para regar, fertilizar y exponer a la luz. Se utilizará una matriz de LEDs o un display de 7 segmentos para visualizar el estado de la planta.
+
+## 3. Requisitos del Sistema
+
+### 3.1 Sistema de Botones
+
+- **Reset:** Reinicia el crecimiento de la planta.
+- **Test:** Permite navegar entre los estados de prueba.
+- **Interacción:** Dos botones para regar y fertilizar la planta.
+
+### 3.2 Sistema de Sensado
+
+Se usará al menos un sensor para mejorar la interacción, como:
+
+- **Sensor de humedad:** Detecta la necesidad de riego.
+- **Sensor de luz:** Determina la cantidad de luz recibida y afecta el crecimiento de la planta.
+
+### 3.3 Sistema de Visualización
+
+- **Matriz de LED 8x8** para mostrar el estado de crecimiento de la planta.
+- **Display de 7 segmentos** para representar niveles de hidratación o crecimiento.
+
+## 4. Arquitectura del Sistema
+
+### 4.1 Diagrama de Bloques
+
+(Se incluirá un diagrama básico con FPGA, botones, sensores y pantalla).
+
+### 4.2 Descripción de Componentes
+
+- **FPGA:** Ejecuta la lógica del crecimiento de la planta.
+- **Pantalla:** Matriz LED o display de 7 segmentos.
+- **Botones:** Entrada principal de usuario.
+- **Sensores:** Proporcionan datos adicionales al sistema.
+
+### 4.3 Interfaces
+
+- Comunicación entre FPGA y pantalla.
+- Entradas digitales para botones.
+- Integración con sensores seleccionados.
+
+## 5. Modos de Operación
+
+### 5.1 Modo Test
+
+Permite verificar estados y funcionalidad sin esperar cambios naturales.
+
+### 5.2 Modo Normal
+
+El usuario interactúa con la planta, la cual responde según sus necesidades y el paso del tiempo.
+
+### 5.3 Modo Aceleración (Opcional)
+
+Incrementa la velocidad de simulación para observar cambios rápidos en el crecimiento.
+
+## 6. Estados y Transiciones
+
+### 6.1 Estados Principales
+
+- **Seca:** Requiere riego.
+- **Crecimiento:** Se desarrolla con el agua y la luz adecuadas.
+- **Fertilización:** Necesita nutrientes para un mejor crecimiento.
+- **Marchita:** Falta de agua, luz o fertilización.
+- **Floreciendo:** Resultado de buen cuidado.
+
+### 6.2 Transiciones
+
+- Temporizadores para cambio de estados.
+- Botones y sensores modifican el estado de la planta.
+- Eventos aleatorios pueden afectar su crecimiento.
+
+## 7. Requisitos de Implementación
+
+- **Lenguaje:** Verilog.
+- **Plataforma:** FPGA Cyclone IV.
+- **Herramientas:** Quartus Prime.
+- **Periféricos:** Botones, sensores y matriz LED.
+
+## 8. Plan de Verificación y Validación
+
+- Pruebas individuales de cada módulo.
+- Simulación en Quartus antes de la implementación física.
+- Validación del comportamiento con interacción real.
+
