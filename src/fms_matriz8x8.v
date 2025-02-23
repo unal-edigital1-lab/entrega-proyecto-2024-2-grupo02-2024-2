@@ -7,30 +7,27 @@ module fms_matriz8x8 (
     output cs            	// Chip Select
 );
 
-/*TODO: VALIDAR  QUE EL CS SE ACIVE PARA LOS 16 BITS  Y NO SOO OCHO */
-
-   reg [7:0] data_in;
-   wire [7:0] data_out;
- 
-   reg start;
-   wire busy;
-   wire avail;
+    reg [15:0] data_in;      
+    wire [15:0] data_out;   
+    reg start;
+    wire busy;
+    wire avail;
   
-   wire [25:0] div_factor = 25000000;  // Factor de división fijo
+    wire [25:0] div_factor = 25000000;  // Factor de división fijo
 
-	spi_master spi (
-       .clk(clk),
-       .reset(~reset),
-       .data_in(data_in),
-       .start(start),
-       .div_factor(div_factor),
-       .mosi(mosi),
-       .sclk(sclk),
-       .cs(cs),
-       .data_out(data_out),
-       .busy(busy),
-       .avail(avail)
-   );
+    spi_master spi (
+        .clk(clk),
+        .reset(~reset),
+        .data_in(data_in),  
+        .start(start),
+        .div_factor(div_factor),
+        .mosi(mosi),
+        .sclk(sclk),
+        .cs(cs),
+        .data_out(data_out),
+        .busy(busy),
+        .avail(avail)
+    );
 
     // Memoria ampliada para 4 patrones (32 bytes por patrón)
     reg [7:0] memory4CommandSend [0:143]; // 144 posiciones (9 init + 4x33 datos)
@@ -94,7 +91,7 @@ module fms_matriz8x8 (
         memory4CommandSend[72] = 8'h08; memory4CommandSend[73] = 8'b00000000; // Fila 8
     end
 
-    always @(posedge clk) begin
+     always @(posedge clk) begin
         if (~reset) begin
             state_send <= 0;
             sendByte <= 0;
@@ -102,22 +99,21 @@ module fms_matriz8x8 (
         end else begin
             case (state_send)
                 0: begin
-                    // Selección de patrón basado en la entrada 'state'
+                    // Carga dirección y dato en 16 bits
                     case(state)
-                        2'b00: data_in <= memory4CommandSend[10 + mem_index];  // A
-                        2'b01: data_in <= memory4CommandSend[26 + mem_index];  // B
-                        2'b10: data_in <= memory4CommandSend[42 + mem_index];  // C
-                        2'b11: data_in <= memory4CommandSend[58 + mem_index];  // D
+                        2'b00: data_in <= {memory4CommandSend[10 + mem_index], memory4CommandSend[11 + mem_index]}; // A
+                        2'b01: data_in <= {memory4CommandSend[26 + mem_index], memory4CommandSend[27 + mem_index]}; // B
+                        2'b10: data_in <= {memory4CommandSend[42 + mem_index], memory4CommandSend[43 + mem_index]}; // C
+                        2'b11: data_in <= {memory4CommandSend[58 + mem_index], memory4CommandSend[59 + mem_index]}; // D
                     endcase
-                    sendByte <= 1; 
+                    start <= 1;       // Inicia transmisión
                     state_send <= 1;
                 end
-                1: state_send <= 2;
-                2: begin
-                    sendByte <= 0; 
+                1: begin
+                    start <= 0;       // Baja la señal start
                     if (avail) begin
-                        mem_index <= mem_index + 1;
-                        if (mem_index == 15) begin  // Reiniciar después de 16 bytes (8 filas)
+                        mem_index <= mem_index + 2; // Avanza 2 bytes por comando
+                        if (mem_index >= 14) begin   // Reinicia después de 8 comandos (16 bytes)
                             mem_index <= 0;
                         end
                         state_send <= 0;
@@ -126,24 +122,4 @@ module fms_matriz8x8 (
             endcase
         end
     end
-	 
-	// para enviar un byte por spi
-   always @(negedge clk) begin
-		 if (~reset) begin
-           start <= 0;
-       end else begin
-           case(start)
-               0: begin  // IDLE
-                   if (!busy && sendByte) begin
-                       start <= 1;
-                   end
-               end
-               1: begin  // SEND
-                   if (avail) begin
-                       start <= 0;
-                   end
-               end
-           endcase
-       end
-   end
 endmodule

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Tagamotchi
-Thu Feb 20 10:14:43 2025
+Sun Feb 23 15:23:56 2025
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -21,12 +21,14 @@ Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
  13. Registers Packed Into Inferred Megafunctions
  14. Multiplexer Restructuring Statistics (Restructuring Performed)
  15. Source assignments for altsyncram:memory4CommandSend_rtl_0|altsyncram_4m81:auto_generated
- 16. Parameter Settings for Inferred Entity Instance: altsyncram:memory4CommandSend_rtl_0
- 17. altsyncram Parameter Settings by Entity Instance
- 18. Port Connectivity Checks: "spi_master:spi"
- 19. Post-Synthesis Netlist Statistics for Top Partition
- 20. Elapsed Time Per Partition
- 21. Analysis & Synthesis Messages
+ 16. Source assignments for altsyncram:memory4CommandSend_rtl_1|altsyncram_4m81:auto_generated
+ 17. Parameter Settings for Inferred Entity Instance: altsyncram:memory4CommandSend_rtl_0
+ 18. Parameter Settings for Inferred Entity Instance: altsyncram:memory4CommandSend_rtl_1
+ 19. altsyncram Parameter Settings by Entity Instance
+ 20. Port Connectivity Checks: "spi_master:spi"
+ 21. Post-Synthesis Netlist Statistics for Top Partition
+ 22. Elapsed Time Per Partition
+ 23. Analysis & Synthesis Messages
 
 
 
@@ -53,18 +55,18 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                        ;
 +------------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Feb 20 10:14:43 2025          ;
+; Analysis & Synthesis Status        ; Successful - Sun Feb 23 15:23:56 2025          ;
 ; Quartus Prime Version              ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
 ; Revision Name                      ; Tagamotchi                                     ;
 ; Top-level Entity Name              ; fms_matriz8x8                                  ;
 ; Family                             ; Cyclone IV E                                   ;
-; Total logic elements               ; 71                                             ;
-;     Total combinational functions  ; 71                                             ;
-;     Dedicated logic registers      ; 47                                             ;
-; Total registers                    ; 47                                             ;
+; Total logic elements               ; 78                                             ;
+;     Total combinational functions  ; 78                                             ;
+;     Dedicated logic registers      ; 51                                             ;
+; Total registers                    ; 51                                             ;
 ; Total pins                         ; 7                                              ;
 ; Total virtual pins                 ; 0                                              ;
-; Total memory bits                  ; 1,152                                          ;
+; Total memory bits                  ; 2,304                                          ;
 ; Embedded Multiplier 9-bit elements ; 0                                              ;
 ; Total PLLs                         ; 0                                              ;
 +------------------------------------+------------------------------------------------+
@@ -190,7 +192,7 @@ https://fpgasoftware.intel.com/eula.
 ; altram.inc                                        ; yes             ; Megafunction                                          ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altram.inc                                         ;         ;
 ; altdpram.inc                                      ; yes             ; Megafunction                                          ; c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altdpram.inc                                       ;         ;
 ; db/altsyncram_4m81.tdf                            ; yes             ; Auto-Generated Megafunction                           ; C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/db/altsyncram_4m81.tdf                            ;         ;
-; db/Tagamotchi.ram0_fms_matriz8x8_ac9f71ba.hdl.mif ; yes             ; Auto-Generated Auto-Found Memory Initialization File  ; C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/db/Tagamotchi.ram0_fms_matriz8x8_ac9f71ba.hdl.mif ;         ;
+; db/tagamotchi.ram0_fms_matriz8x8_ac9f71ba.hdl.mif ; yes             ; Auto-Generated Auto-Found Memory Initialization File  ; C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/db/tagamotchi.ram0_fms_matriz8x8_ac9f71ba.hdl.mif ;         ;
 +---------------------------------------------------+-----------------+-------------------------------------------------------+--------------------------------------------------------------------------------------------------------------+---------+
 
 
@@ -199,31 +201,31 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 71        ;
+; Estimated Total logic elements              ; 78        ;
 ;                                             ;           ;
-; Total combinational functions               ; 71        ;
+; Total combinational functions               ; 78        ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 25        ;
-;     -- 3 input functions                    ; 14        ;
-;     -- <=2 input functions                  ; 32        ;
+;     -- 4 input functions                    ; 31        ;
+;     -- 3 input functions                    ; 8         ;
+;     -- <=2 input functions                  ; 39        ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 44        ;
-;     -- arithmetic mode                      ; 27        ;
+;     -- normal mode                          ; 48        ;
+;     -- arithmetic mode                      ; 30        ;
 ;                                             ;           ;
-; Total registers                             ; 47        ;
-;     -- Dedicated logic registers            ; 47        ;
+; Total registers                             ; 51        ;
+;     -- Dedicated logic registers            ; 51        ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
 ; I/O pins                                    ; 7         ;
-; Total memory bits                           ; 1152      ;
+; Total memory bits                           ; 2304      ;
 ;                                             ;           ;
 ; Embedded Multiplier 9-bit elements          ; 0         ;
 ;                                             ;           ;
 ; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 55        ;
-; Total fan-out                               ; 479       ;
-; Average fan-out                             ; 3.42      ;
+; Maximum fan-out                             ; 67        ;
+; Total fan-out                               ; 597       ;
+; Average fan-out                             ; 3.75      ;
 +---------------------------------------------+-----------+
 
 
@@ -232,10 +234,12 @@ https://fpgasoftware.intel.com/eula.
 +------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------+-----------------+--------------+
 ; Compilation Hierarchy Node               ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                               ; Entity Name     ; Library Name ;
 +------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------+-----------------+--------------+
-; |fms_matriz8x8                           ; 71 (24)             ; 47 (13)                   ; 1152        ; 0            ; 0       ; 0         ; 7    ; 0            ; |fms_matriz8x8                                                                    ; fms_matriz8x8   ; work         ;
+; |fms_matriz8x8                           ; 78 (21)             ; 51 (9)                    ; 2304        ; 0            ; 0       ; 0         ; 7    ; 0            ; |fms_matriz8x8                                                                    ; fms_matriz8x8   ; work         ;
 ;    |altsyncram:memory4CommandSend_rtl_0| ; 0 (0)               ; 0 (0)                     ; 1152        ; 0            ; 0       ; 0         ; 0    ; 0            ; |fms_matriz8x8|altsyncram:memory4CommandSend_rtl_0                                ; altsyncram      ; work         ;
 ;       |altsyncram_4m81:auto_generated|   ; 0 (0)               ; 0 (0)                     ; 1152        ; 0            ; 0       ; 0         ; 0    ; 0            ; |fms_matriz8x8|altsyncram:memory4CommandSend_rtl_0|altsyncram_4m81:auto_generated ; altsyncram_4m81 ; work         ;
-;    |spi_master:spi|                      ; 47 (47)             ; 34 (34)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fms_matriz8x8|spi_master:spi                                                     ; spi_master      ; work         ;
+;    |altsyncram:memory4CommandSend_rtl_1| ; 0 (0)               ; 0 (0)                     ; 1152        ; 0            ; 0       ; 0         ; 0    ; 0            ; |fms_matriz8x8|altsyncram:memory4CommandSend_rtl_1                                ; altsyncram      ; work         ;
+;       |altsyncram_4m81:auto_generated|   ; 0 (0)               ; 0 (0)                     ; 1152        ; 0            ; 0       ; 0         ; 0    ; 0            ; |fms_matriz8x8|altsyncram:memory4CommandSend_rtl_1|altsyncram_4m81:auto_generated ; altsyncram_4m81 ; work         ;
+;    |spi_master:spi|                      ; 57 (57)             ; 42 (42)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |fms_matriz8x8|spi_master:spi                                                     ; spi_master      ; work         ;
 +------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------+-----------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -246,37 +250,39 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name                                                                          ; Type ; Mode ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF                                               ;
 +-------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+---------------------------------------------------+
 ; altsyncram:memory4CommandSend_rtl_0|altsyncram_4m81:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; 144          ; 8            ; --           ; --           ; 1152 ; db/Tagamotchi.ram0_fms_matriz8x8_ac9f71ba.hdl.mif ;
+; altsyncram:memory4CommandSend_rtl_1|altsyncram_4m81:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; 144          ; 8            ; --           ; --           ; 1152 ; db/Tagamotchi.ram0_fms_matriz8x8_ac9f71ba.hdl.mif ;
 +-------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+---------------------------------------------------+
 
 
 Encoding Type:  One-Hot
-+---------------------------------------------------------------------------------------------------+
-; State Machine - |fms_matriz8x8|state_send                                                         ;
-+------------------------+------------------------+------------------------+------------------------+
-; Name                   ; state_send.00000000000 ; state_send.00000000010 ; state_send.00000000001 ;
-+------------------------+------------------------+------------------------+------------------------+
-; state_send.00000000000 ; 0                      ; 0                      ; 0                      ;
-; state_send.00000000001 ; 1                      ; 0                      ; 1                      ;
-; state_send.00000000010 ; 1                      ; 1                      ; 0                      ;
-+------------------------+------------------------+------------------------+------------------------+
++-------------------------------------------------+
+; State Machine - |fms_matriz8x8|state_send       ;
++------------------------+------------------------+
+; Name                   ; state_send.00000000001 ;
++------------------------+------------------------+
+; state_send.00000000000 ; 0                      ;
+; state_send.00000000001 ; 1                      ;
++------------------------+------------------------+
 
 
-+------------------------------------------------------------+
-; Registers Removed During Synthesis                         ;
-+---------------------------------------+--------------------+
-; Register name                         ; Reason for Removal ;
-+---------------------------------------+--------------------+
-; state_send~7                          ; Lost fanout        ;
-; state_send~8                          ; Lost fanout        ;
-; state_send~9                          ; Lost fanout        ;
-; state_send~10                         ; Lost fanout        ;
-; state_send~11                         ; Lost fanout        ;
-; state_send~12                         ; Lost fanout        ;
-; state_send~13                         ; Lost fanout        ;
-; state_send~14                         ; Lost fanout        ;
-; state_send~15                         ; Lost fanout        ;
-; Total Number of Removed Registers = 9 ;                    ;
-+---------------------------------------+--------------------+
++---------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                              ;
++----------------------------------------+----------------------------------------+
+; Register name                          ; Reason for Removal                     ;
++----------------------------------------+----------------------------------------+
+; mem_index[0]                           ; Stuck at GND due to stuck port data_in ;
+; state_send~5                           ; Lost fanout                            ;
+; state_send~6                           ; Lost fanout                            ;
+; state_send~7                           ; Lost fanout                            ;
+; state_send~8                           ; Lost fanout                            ;
+; state_send~9                           ; Lost fanout                            ;
+; state_send~10                          ; Lost fanout                            ;
+; state_send~11                          ; Lost fanout                            ;
+; state_send~12                          ; Lost fanout                            ;
+; state_send~13                          ; Lost fanout                            ;
+; state_send~14                          ; Lost fanout                            ;
+; Total Number of Removed Registers = 11 ;                                        ;
++----------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -284,12 +290,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 47    ;
-; Number of registers using Synchronous Clear  ; 27    ;
-; Number of registers using Synchronous Load   ; 1     ;
-; Number of registers using Asynchronous Clear ; 33    ;
+; Total registers                              ; 51    ;
+; Number of registers using Synchronous Clear  ; 23    ;
+; Number of registers using Synchronous Load   ; 5     ;
+; Number of registers using Asynchronous Clear ; 41    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 33    ;
+; Number of registers using Clock Enable       ; 46    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -299,18 +305,19 @@ Encoding Type:  One-Hot
 +----------------------------------------+---------+
 ; Inverted Register                      ; Fan out ;
 +----------------------------------------+---------+
-; spi_master:spi|cs                      ; 2       ;
+; spi_master:spi|cs                      ; 1       ;
 ; Total number of inverted registers = 1 ;         ;
 +----------------------------------------+---------+
 
 
-+-------------------------------------------------+
-; Registers Packed Into Inferred Megafunctions    ;
-+---------------+--------------------------+------+
-; Register Name ; Megafunction             ; Type ;
-+---------------+--------------------------+------+
-; data_in[0..7] ; memory4CommandSend_rtl_0 ; RAM  ;
-+---------------+--------------------------+------+
++--------------------------------------------------+
+; Registers Packed Into Inferred Megafunctions     ;
++----------------+--------------------------+------+
+; Register Name  ; Megafunction             ; Type ;
++----------------+--------------------------+------+
+; data_in[8..15] ; memory4CommandSend_rtl_0 ; RAM  ;
+; data_in[0..7]  ; memory4CommandSend_rtl_1 ; RAM  ;
++----------------+--------------------------+------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -318,15 +325,24 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                 ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |fms_matriz8x8|spi_master:spi|busy         ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |fms_matriz8x8|spi_master:spi|bit_count[3] ;
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |fms_matriz8x8|spi_master:spi|shift_reg[7] ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |fms_matriz8x8|mem_index[0]                ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |fms_matriz8x8|spi_master:spi|shift_reg[5] ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |fms_matriz8x8|spi_master:spi|bit_count[4] ;
+; 4:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |fms_matriz8x8|mem_index[1]                ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |fms_matriz8x8|state_send                  ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
 
 
 +-------------------------------------------------------------------------------------------+
 ; Source assignments for altsyncram:memory4CommandSend_rtl_0|altsyncram_4m81:auto_generated ;
++---------------------------------+--------------------+------+-----------------------------+
+; Assignment                      ; Value              ; From ; To                          ;
++---------------------------------+--------------------+------+-----------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                           ;
++---------------------------------+--------------------+------+-----------------------------+
+
+
++-------------------------------------------------------------------------------------------+
+; Source assignments for altsyncram:memory4CommandSend_rtl_1|altsyncram_4m81:auto_generated ;
 +---------------------------------+--------------------+------+-----------------------------+
 ; Assignment                      ; Value              ; From ; To                          ;
 +---------------------------------+--------------------+------+-----------------------------+
@@ -395,13 +411,85 @@ Encoding Type:  One-Hot
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: altsyncram:memory4CommandSend_rtl_1                    ;
++------------------------------------+---------------------------------------------------+----------------+
+; Parameter Name                     ; Value                                             ; Type           ;
++------------------------------------+---------------------------------------------------+----------------+
+; BYTE_SIZE_BLOCK                    ; 8                                                 ; Untyped        ;
+; AUTO_CARRY_CHAINS                  ; ON                                                ; AUTO_CARRY     ;
+; IGNORE_CARRY_BUFFERS               ; OFF                                               ; IGNORE_CARRY   ;
+; AUTO_CASCADE_CHAINS                ; ON                                                ; AUTO_CASCADE   ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                                               ; IGNORE_CASCADE ;
+; WIDTH_BYTEENA                      ; 1                                                 ; Untyped        ;
+; OPERATION_MODE                     ; ROM                                               ; Untyped        ;
+; WIDTH_A                            ; 8                                                 ; Untyped        ;
+; WIDTHAD_A                          ; 8                                                 ; Untyped        ;
+; NUMWORDS_A                         ; 144                                               ; Untyped        ;
+; OUTDATA_REG_A                      ; UNREGISTERED                                      ; Untyped        ;
+; ADDRESS_ACLR_A                     ; NONE                                              ; Untyped        ;
+; OUTDATA_ACLR_A                     ; NONE                                              ; Untyped        ;
+; WRCONTROL_ACLR_A                   ; NONE                                              ; Untyped        ;
+; INDATA_ACLR_A                      ; NONE                                              ; Untyped        ;
+; BYTEENA_ACLR_A                     ; NONE                                              ; Untyped        ;
+; WIDTH_B                            ; 1                                                 ; Untyped        ;
+; WIDTHAD_B                          ; 1                                                 ; Untyped        ;
+; NUMWORDS_B                         ; 1                                                 ; Untyped        ;
+; INDATA_REG_B                       ; CLOCK1                                            ; Untyped        ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1                                            ; Untyped        ;
+; RDCONTROL_REG_B                    ; CLOCK1                                            ; Untyped        ;
+; ADDRESS_REG_B                      ; CLOCK1                                            ; Untyped        ;
+; OUTDATA_REG_B                      ; UNREGISTERED                                      ; Untyped        ;
+; BYTEENA_REG_B                      ; CLOCK1                                            ; Untyped        ;
+; INDATA_ACLR_B                      ; NONE                                              ; Untyped        ;
+; WRCONTROL_ACLR_B                   ; NONE                                              ; Untyped        ;
+; ADDRESS_ACLR_B                     ; NONE                                              ; Untyped        ;
+; OUTDATA_ACLR_B                     ; NONE                                              ; Untyped        ;
+; RDCONTROL_ACLR_B                   ; NONE                                              ; Untyped        ;
+; BYTEENA_ACLR_B                     ; NONE                                              ; Untyped        ;
+; WIDTH_BYTEENA_A                    ; 1                                                 ; Untyped        ;
+; WIDTH_BYTEENA_B                    ; 1                                                 ; Untyped        ;
+; RAM_BLOCK_TYPE                     ; AUTO                                              ; Untyped        ;
+; BYTE_SIZE                          ; 8                                                 ; Untyped        ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                         ; Untyped        ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ                              ; Untyped        ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ                              ; Untyped        ;
+; INIT_FILE                          ; db/Tagamotchi.ram0_fms_matriz8x8_ac9f71ba.hdl.mif ; Untyped        ;
+; INIT_FILE_LAYOUT                   ; PORT_A                                            ; Untyped        ;
+; MAXIMUM_DEPTH                      ; 0                                                 ; Untyped        ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL                                            ; Untyped        ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL                                            ; Untyped        ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL                                            ; Untyped        ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL                                            ; Untyped        ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN                                   ; Untyped        ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN                                   ; Untyped        ;
+; ENABLE_ECC                         ; FALSE                                             ; Untyped        ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                                             ; Untyped        ;
+; WIDTH_ECCSTATUS                    ; 3                                                 ; Untyped        ;
+; DEVICE_FAMILY                      ; Cyclone IV E                                      ; Untyped        ;
+; CBXI_PARAMETER                     ; altsyncram_4m81                                   ; Untyped        ;
++------------------------------------+---------------------------------------------------+----------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +---------------------------------------------------------------------------------+
 ; altsyncram Parameter Settings by Entity Instance                                ;
 +-------------------------------------------+-------------------------------------+
 ; Name                                      ; Value                               ;
 +-------------------------------------------+-------------------------------------+
-; Number of entity instances                ; 1                                   ;
+; Number of entity instances                ; 2                                   ;
 ; Entity Instance                           ; altsyncram:memory4CommandSend_rtl_0 ;
+;     -- OPERATION_MODE                     ; ROM                                 ;
+;     -- WIDTH_A                            ; 8                                   ;
+;     -- NUMWORDS_A                         ; 144                                 ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                        ;
+;     -- WIDTH_B                            ; 1                                   ;
+;     -- NUMWORDS_B                         ; 1                                   ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                              ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                        ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                           ;
+; Entity Instance                           ; altsyncram:memory4CommandSend_rtl_1 ;
 ;     -- OPERATION_MODE                     ; ROM                                 ;
 ;     -- WIDTH_A                            ; 8                                   ;
 ;     -- NUMWORDS_A                         ; 144                                 ;
@@ -427,6 +515,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; div_factor[15]     ; Input  ; Info     ; Stuck at GND                                                                                                                                                                        ;
 ; div_factor[6]      ; Input  ; Info     ; Stuck at VCC                                                                                                                                                                        ;
 ; data_out           ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                                                                 ;
+; busy               ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                                                                 ;
 ; miso               ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND.                                        ;
 +--------------------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
@@ -437,27 +526,28 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 7                           ;
-; cycloneiii_ff         ; 47                          ;
-;     CLR               ; 7                           ;
-;     CLR SLD           ; 1                           ;
-;     ENA CLR           ; 9                           ;
+; cycloneiii_ff         ; 51                          ;
+;     CLR               ; 3                           ;
+;     ENA               ; 1                           ;
+;     ENA CLR           ; 17                          ;
 ;     ENA CLR SCLR      ; 16                          ;
-;     ENA SCLR          ; 8                           ;
-;     SCLR              ; 3                           ;
-;     plain             ; 3                           ;
-; cycloneiii_lcell_comb ; 72                          ;
-;     arith             ; 27                          ;
-;         2 data inputs ; 24                          ;
+;     ENA CLR SLD       ; 5                           ;
+;     ENA SCLR          ; 7                           ;
+;     plain             ; 2                           ;
+; cycloneiii_lcell_comb ; 79                          ;
+;     arith             ; 30                          ;
+;         2 data inputs ; 27                          ;
 ;         3 data inputs ; 3                           ;
-;     normal            ; 45                          ;
-;         1 data inputs ; 7                           ;
-;         2 data inputs ; 2                           ;
-;         3 data inputs ; 11                          ;
-;         4 data inputs ; 25                          ;
-; cycloneiii_ram_block  ; 8                           ;
+;     normal            ; 49                          ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 8                           ;
+;         2 data inputs ; 4                           ;
+;         3 data inputs ; 5                           ;
+;         4 data inputs ; 31                          ;
+; cycloneiii_ram_block  ; 16                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 5.00                        ;
-; Average LUT depth     ; 2.33                        ;
+; Average LUT depth     ; 2.02                        ;
 +-----------------------+-----------------------------+
 
 
@@ -476,7 +566,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
-    Info: Processing started: Thu Feb 20 10:14:34 2025
+    Info: Processing started: Sun Feb 23 15:23:47 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Tagamotchi -c Tagamotchi
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
@@ -485,15 +575,27 @@ Info (12021): Found 1 design units, including 1 entities, in source file src/spi
 Info (12021): Found 1 design units, including 1 entities, in source file src/fms_matriz8x8.v
     Info (12023): Found entity 1: fms_matriz8x8 File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/fms_matriz8x8.v Line: 1
 Info (12127): Elaborating entity "fms_matriz8x8" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at fms_matriz8x8.v(119): truncated value with size 32 to match size of target (8) File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/fms_matriz8x8.v Line: 119
-Warning (10030): Net "memory4CommandSend.data_a" at fms_matriz8x8.v(36) has no driver or initial value, using a default initial value '0' File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/fms_matriz8x8.v Line: 36
-Warning (10030): Net "memory4CommandSend.waddr_a" at fms_matriz8x8.v(36) has no driver or initial value, using a default initial value '0' File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/fms_matriz8x8.v Line: 36
-Warning (10030): Net "memory4CommandSend.we_a" at fms_matriz8x8.v(36) has no driver or initial value, using a default initial value '0' File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/fms_matriz8x8.v Line: 36
-Info (12128): Elaborating entity "spi_master" for hierarchy "spi_master:spi" File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/fms_matriz8x8.v Line: 33
-Warning (10230): Verilog HDL assignment warning at spi_master.v(42): truncated value with size 32 to match size of target (16) File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/spi_master.v Line: 42
-Warning (10230): Verilog HDL assignment warning at spi_master.v(51): truncated value with size 32 to match size of target (4) File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/spi_master.v Line: 51
-Info (19000): Inferred 1 megafunctions from design logic
+Warning (10036): Verilog HDL or VHDL warning at fms_matriz8x8.v(37): object "sendByte" assigned a value but never read File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/fms_matriz8x8.v Line: 37
+Warning (10230): Verilog HDL assignment warning at fms_matriz8x8.v(115): truncated value with size 32 to match size of target (8) File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/fms_matriz8x8.v Line: 115
+Warning (10030): Net "memory4CommandSend.data_a" at fms_matriz8x8.v(33) has no driver or initial value, using a default initial value '0' File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/fms_matriz8x8.v Line: 33
+Warning (10030): Net "memory4CommandSend.waddr_a" at fms_matriz8x8.v(33) has no driver or initial value, using a default initial value '0' File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/fms_matriz8x8.v Line: 33
+Warning (10030): Net "memory4CommandSend.we_a" at fms_matriz8x8.v(33) has no driver or initial value, using a default initial value '0' File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/fms_matriz8x8.v Line: 33
+Info (12128): Elaborating entity "spi_master" for hierarchy "spi_master:spi" File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/fms_matriz8x8.v Line: 30
+Warning (10230): Verilog HDL assignment warning at spi_master.v(40): truncated value with size 32 to match size of target (16) File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/spi_master.v Line: 40
+Warning (10230): Verilog HDL assignment warning at spi_master.v(50): truncated value with size 32 to match size of target (5) File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/spi_master.v Line: 50
+Info (19000): Inferred 2 megafunctions from design logic
     Info (276029): Inferred altsyncram megafunction from the following design logic: "memory4CommandSend_rtl_0" 
+        Info (286033): Parameter OPERATION_MODE set to ROM
+        Info (286033): Parameter WIDTH_A set to 8
+        Info (286033): Parameter WIDTHAD_A set to 8
+        Info (286033): Parameter NUMWORDS_A set to 144
+        Info (286033): Parameter OUTDATA_REG_A set to UNREGISTERED
+        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
+        Info (286033): Parameter OUTDATA_ACLR_A set to NONE
+        Info (286033): Parameter INDATA_ACLR_A set to NONE
+        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
+        Info (286033): Parameter INIT_FILE set to db/Tagamotchi.ram0_fms_matriz8x8_ac9f71ba.hdl.mif
+    Info (276029): Inferred altsyncram megafunction from the following design logic: "memory4CommandSend_rtl_1" 
         Info (286033): Parameter OPERATION_MODE set to ROM
         Info (286033): Parameter WIDTH_A set to 8
         Info (286033): Parameter WIDTHAD_A set to 8
@@ -518,24 +620,34 @@ Info (12133): Instantiated megafunction "altsyncram:memory4CommandSend_rtl_0" wi
     Info (12134): Parameter "INIT_FILE" = "db/Tagamotchi.ram0_fms_matriz8x8_ac9f71ba.hdl.mif"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_4m81.tdf
     Info (12023): Found entity 1: altsyncram_4m81 File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/db/altsyncram_4m81.tdf Line: 28
-Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/db/Tagamotchi.ram0_fms_matriz8x8_ac9f71ba.hdl.mif" contains "don't care" values -- overwriting them with 0s File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
-Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/db/Tagamotchi.ram0_fms_matriz8x8_ac9f71ba.hdl.mif" contains "don't care" values -- overwriting them with 0s File: c:/intelfpga_lite/23.1std/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
+Info (12130): Elaborated megafunction instantiation "altsyncram:memory4CommandSend_rtl_1"
+Info (12133): Instantiated megafunction "altsyncram:memory4CommandSend_rtl_1" with the following parameter:
+    Info (12134): Parameter "OPERATION_MODE" = "ROM"
+    Info (12134): Parameter "WIDTH_A" = "8"
+    Info (12134): Parameter "WIDTHAD_A" = "8"
+    Info (12134): Parameter "NUMWORDS_A" = "144"
+    Info (12134): Parameter "OUTDATA_REG_A" = "UNREGISTERED"
+    Info (12134): Parameter "ADDRESS_ACLR_A" = "NONE"
+    Info (12134): Parameter "OUTDATA_ACLR_A" = "NONE"
+    Info (12134): Parameter "INDATA_ACLR_A" = "NONE"
+    Info (12134): Parameter "WRCONTROL_ACLR_A" = "NONE"
+    Info (12134): Parameter "INIT_FILE" = "db/Tagamotchi.ram0_fms_matriz8x8_ac9f71ba.hdl.mif"
 Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Info (13000): Registers with preset signals will power-up high File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/src/spi_master.v Line: 10
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 9 registers lost all their fanouts during netlist optimizations.
+Info (17049): 10 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 89 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 103 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 4 input pins
     Info (21059): Implemented 3 output pins
-    Info (21061): Implemented 74 logic cells
-    Info (21064): Implemented 8 RAM segments
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 10 warnings
+    Info (21061): Implemented 80 logic cells
+    Info (21064): Implemented 16 RAM segments
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 9 warnings
     Info: Peak virtual memory: 4830 megabytes
-    Info: Processing ended: Thu Feb 20 10:14:43 2025
-    Info: Elapsed time: 00:00:09
-    Info: Total CPU time (on all processors): 00:00:11
+    Info: Processing ended: Sun Feb 23 15:23:57 2025
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:09
 
 

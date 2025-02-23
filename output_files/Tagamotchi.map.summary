@@ -1,14 +1,14 @@
-Analysis & Synthesis Status : Successful - Thu Feb 20 10:14:43 2025
+Analysis & Synthesis Status : Successful - Sun Feb 23 15:23:56 2025
 Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 Revision Name : Tagamotchi
 Top-level Entity Name : fms_matriz8x8
 Family : Cyclone IV E
-Total logic elements : 71
-    Total combinational functions : 71
-    Dedicated logic registers : 47
-Total registers : 47
+Total logic elements : 78
+    Total combinational functions : 78
+    Dedicated logic registers : 51
+Total registers : 51
 Total pins : 7
 Total virtual pins : 0
-Total memory bits : 1,152
+Total memory bits : 2,304
 Embedded Multiplier 9-bit elements : 0
 Total PLLs : 0
