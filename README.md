@@ -1,4 +1,4 @@
-# Proyecto Tamagotchi Electrónica Digital
+i# Proyecto Tamagotchi Electrónica Digital
 
 * Paula Ruiz
 * Duvan Tique
@@ -47,6 +47,7 @@ El Tamagotchi mantiene cinco necesidades: humedad, nutrición, energía, manteni
 
 ## Arquitectura del sistema 
 ### Módulo Top (Tamaguchi.v)
+*
 
 
 
