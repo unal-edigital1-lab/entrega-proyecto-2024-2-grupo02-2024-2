@@ -13,4 +13,5 @@ El proyecto “Tamagotchi” emula una mascota virtual que reacciona a las atenc
   * Luz (foto-resistencia con comparador): Indica claridad o noche.
 * Pantallas:
   * Matrices LED WS2812 de 8×8 para mostrar la animación del Tamagotchi y sus barras de necesidades.
-  * Display de 7 segmentos para visualizar la velocidad y la puntuación.*
+  * Display de 7 segmentos para visualizar la velocidad y la puntuación.
+El Tamagotchi mantiene cinco necesidades: humedad, nutrición, energía, mantenimiento, cortado (podado). Cada necesidad se expresa con 3 bits (valores 0 a 7). Cuando su nivel disminuye, el Tamagotchi cambia de estado (cansado, hambriento, etc.), repercutiendo en la puntuación final.
