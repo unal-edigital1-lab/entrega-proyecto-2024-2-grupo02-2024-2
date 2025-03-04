@@ -1,4 +1,4 @@
-i# Proyecto Tamagotchi Electrónica Digital
+# Proyecto Tamagotchi Electrónica Digital
 
 * Paula Ruiz
 * Duvan Tique
