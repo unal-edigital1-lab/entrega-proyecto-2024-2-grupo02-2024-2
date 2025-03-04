@@ -17,9 +17,7 @@ El proyecto “Tamagotchi” emula una mascota virtual que reacciona a las atenc
 El Tamagotchi mantiene cinco necesidades: humedad, nutrición, energía, mantenimiento, cortado (podado). Cada necesidad se expresa con 3 bits (valores 0 a 7). Cuando su nivel disminuye, el Tamagotchi cambia de estado (cansado, hambriento, etc.), repercutiendo en la puntuación final.
 ### Diagrama de Caja Negra
 
-![cajanegra](https://github.com/user-attachments/assets/af961033-d2b6-4eac-b042-5176f95446db)
-
-
+![Documentación](https://github.com/user-attachments/assets/0abf3178-ab55-4410-8a3d-d30f4a69f851)
 
 ### Subsistemas Esenciales
 #### Control Principal:
