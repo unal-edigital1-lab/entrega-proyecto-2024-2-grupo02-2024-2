@@ -1,8 +1,8 @@
 # Proyecto Tamagotchi Electrónica Digital
 
-*Paula Ruiz
-*Duvan Tique
-*Diego Vitoviz
+* Paula Ruiz
+* Duvan Tique
+* Diego Vitoviz
 
 ## Descripción General y Especificaciones de los Sistemas
 ### Introducción 
@@ -15,3 +15,9 @@ El proyecto “Tamagotchi” emula una mascota virtual que reacciona a las atenc
   * Matrices LED WS2812 de 8×8 para mostrar la animación del Tamagotchi y sus barras de necesidades.
   * Display de 7 segmentos para visualizar la velocidad y la puntuación.
 El Tamagotchi mantiene cinco necesidades: humedad, nutrición, energía, mantenimiento, cortado (podado). Cada necesidad se expresa con 3 bits (valores 0 a 7). Cuando su nivel disminuye, el Tamagotchi cambia de estado (cansado, hambriento, etc.), repercutiendo en la puntuación final.
+### Diagrama de Caja Negra
+A modo de ejemplo, un diagrama global podría lucir así
+#### DIAGRAMA PAULA
+### Subsistemas Esenciales
+#### Control Principal:
+*Coordina el decremento automático de necesidades con el paso del tiempo.
