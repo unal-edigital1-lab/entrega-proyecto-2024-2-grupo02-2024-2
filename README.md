@@ -314,7 +314,7 @@ Calcula si el Tamagotchi está “cansado”, “desnutrido”, “descuidado”
   - **Entradas:** botones (7 entradas), sensores (echo, trig, claridad).
   - **Salidas:** WS2812 (1 wire data), display 7 segmentos (8 ánodos + 7 bits de segmentos), ledclaridad, ledinteraccion.
 [![Video de Implementación en FPGA](implementación.mp4)]
-
+https://github.com/unal-edigital1-lab/entrega-proyecto-2024-2-grupo02-2024-2/blob/101f67ebad8ed176aab2a9616584e997937abc0b/implementaci%C3%B3n.mp4
 ### 4.3. Posibles Fallas y Recomendaciones
 - **Sensor ultrasónico:** Cableado corto para evitar ruido.
 - **Pantallas WS2812:** Ajuste preciso de pulsos.
