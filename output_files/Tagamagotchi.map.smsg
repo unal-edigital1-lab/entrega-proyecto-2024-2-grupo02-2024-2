@@ -1,0 +1,4 @@
+Warning (10268): Verilog HDL information at Transmisor.v(35): always construct contains both blocking and non-blocking assignments File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/rtl/Transmisor.v Line: 35
+Warning (10268): Verilog HDL information at ImageControl.v(56): always construct contains both blocking and non-blocking assignments File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/rtl/ImageControl.v Line: 56
+Warning (10268): Verilog HDL information at mux64.v(8): always construct contains both blocking and non-blocking assignments File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/rtl/mux64.v Line: 8
+Warning (10268): Verilog HDL information at needcomparator.v(13): always construct contains both blocking and non-blocking assignments File: C:/Proyectosquantus/entrega-proyecto-2024-2-grupo02-2024-2/rtl/needcomparator.v Line: 13

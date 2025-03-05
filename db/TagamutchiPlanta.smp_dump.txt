@@ -1,0 +1,20 @@
+
+State Machine - |Tamagotchi|ultrasonido:driver|state
+Name state.DELAY state.RECIEVEECHO state.WAIT state.000 
+state.000 0 0 0 0 
+state.WAIT 0 0 1 1 
+state.RECIEVEECHO 0 1 0 1 
+state.DELAY 1 0 0 1 
+
+State Machine - |Tamagotchi|ImageControl:controlimagen|state
+Name state.00 state.SENDCOLOR state.SCOLOR 
+state.00 0 0 0 
+state.SCOLOR 1 0 1 
+state.SENDCOLOR 1 1 0 
+
+State Machine - |Tamagotchi|Transmisor:trans|state
+Name state.RESTART state.SENDH state.SENDL state.000 
+state.000 0 0 0 0 
+state.SENDL 0 0 1 1 
+state.SENDH 0 1 0 1 
+state.RESTART 1 0 0 1 
