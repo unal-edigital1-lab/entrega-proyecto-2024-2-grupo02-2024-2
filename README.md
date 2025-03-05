@@ -258,7 +258,7 @@ Calcula si el Tamagotchi está “cansado”, “desnutrido”, “descuidado”
 - **Ejemplo:**
   - `BIEN = 4'b0000` si todas las necesidades ≥5.
   - `MUERTE = 4'b1010` si 4+ necesidades están en 0.
-
+![Diagrama Funcionamiento](docs/diagrama.png)
 ### 3.3. Sensores
 
 #### 3.3.1. Sensor Ultrasónico (ultrasonido)
