@@ -215,26 +215,26 @@ if(pixelactivo == 1)begin
 ### 2.1. Módulo Top (Tamaguchi.v)
 Reúne las señales de:
 
-- **Entradas:** `clk`, `botones`, `echo`, `claridad`.
-- **Salidas:** `pinout` (si se usa transmisión serial), `anodos`, `display`, `ledclaridad`, `ledinteraccion`, `trig`.
+- **Entradas:** clk, botones, echo, claridad.
+- **Salidas:** pinout, anodos, display, ledclaridad, ledinteraccion, trig.
 
-Instancia submódulos como `Transmisor`, `ImageControl`, `StateLogic`, `controlprincipal`, `timecontrol`, `visualizacion`, etc. Esta pieza central conecta:
+Instancia submódulos como Transmisor, ImageControl, StateLogic, controlprincipal, timecontrol, visualizacion, etc. Esta pieza central conecta:
 
-- **Botones** → `debounce` → `controlprincipal`
-- **Sensores** (`echo`, `claridad`) → `ultrasonido` y directamente a `controlprincipal`
-- **Necesidades y estado** se pasan a `StateLogic` → se obtiene `estado[3:0]`.
-- **Imagen base** desde `ROManimation` → `mux64` → `ImageControl`, junto con la “banda” de necesidades (`needcomparator`) → se envían al `Transmisor`.
+- **Botones** → debounce → controlprincipal
+- **Sensores** (echo, claridad`) → ultrasonido y directamente a controlprincipal
+- **Necesidades y estado** se pasan a StateLogic → se obtiene estado[3:0].
+- **Imagen base** desde ROManimation → mux64 → ImageControl, junto con la “banda” de necesidades (needcomparator) → se envían al Transmisor.
 
 ### 2.2. Diagrama de Bloques / Caja Negra
 El Tamagotchi se representa como un supermódulo con submódulos internos:
 
-- **`controlprincipal`**: Ajusta humedad, nutrición, energía, etc.
-- **`StateLogic`**: Determina estado final (código 4 bits).
-- **`controlpuntuacion`**: Actualiza el marcador.
-- **`timecontrol`**: Genera pulsos de paso de tiempo.
-- **`ultrasonido`**: Mide distancias.
-- **`visualizacion`**: Multiplexa displays para puntuación y velocidad.
-- **`Transmisor` + `ImageControl` + `needcomparator` + `ROManimation`**: Manejan la lógica de gráficos en `WS2812`.
+- **controlprincipal**: Ajusta humedad, nutrición, energía, etc.
+- **StateLogic**: Determina estado final (código 4 bits).
+- **controlpuntuacion**: Actualiza el marcador.
+- **timecontrol**: Genera pulsos de paso de tiempo.
+- **ultrasonido**: Mide distancias.
+- **visualizacion**: Multiplexa displays para puntuación y velocidad.
+- **Transmisor + ImageControl + needcomparator + ROManimation**: Manejan la lógica de gráficos en `WS2812`.
 
 ---
 ## 3. Funcionamiento e Implementación
