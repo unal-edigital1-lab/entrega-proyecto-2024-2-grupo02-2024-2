@@ -315,7 +315,7 @@ Calcula si el Tamagotchi está “cansado”, “desnutrido”, “descuidado”
   - **Salidas:** WS2812 (1 wire data), display 7 segmentos (8 ánodos + 7 bits de segmentos), ledclaridad, ledinteraccion.
 ### Video de la implementación
 
-[Ver video de la implementación](docs/video_implementacion.mp4)
+[Ver video de la implementación](video_implementacion.mp4)
 
 
 ### 4.3. Posibles Fallas y Recomendaciones
