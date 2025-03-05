@@ -209,6 +209,8 @@ if(pixelactivo == 1)begin
 * Aplica bonus (+5) si todas suman 35.
 #### Debounce:
 * Filtra el ruido de los botones físicos.
+* Elimina rebotes en botones (~50 ms).
+
 
 ## 2. Arquitectura del Sistema
 
@@ -266,24 +268,24 @@ Calcula si el Tamagotchi está “cansado”, “desnutrido”, “descuidado”
 - **Funcionamiento:**
   - SENDTRIG: Envío de pulso de 10 µs (trig).
   - RECIEVEECHO: Mide cuántos ciclos clk dura echo en alto.
-  - Si `countecho <= 25000`, `interaccion <= 1` (objeto cerca).
+  - Si `countecho <= 25000000`, `interaccion <= 1` (objeto cerca).
 
 #### 3.3.2. Sensor de Luz
 - Implementado externamente con un comparador.
-- **Salida:** `claridad = 1` si hay luz (`foto-resistencia < 1kΩ`), `0` en oscuridad.
+- **Salida:** `claridad = 1` si hay luz (`foto-resistencia < 5-10kΩ`), `0` en oscuridad.
 - **Integración:** El Tamagotchi no descansa si `claridad == 1`.
 
 ### 3.4. Control de Tiempo (`timecontrol`)
 - Define velocidad (X1, X2, X5, X10, X50, X100).
 - Ajusta cuántos ciclos de clk (50 MHz) se requieren para invertir newtime.
-- El usuario cambia la velocidad con botonpass.
+- El usuario cambia la velocidad con botonaceleracción.
 
 ### 3.5. Visualización
 
 #### 3.5.1. Matrices LED (`WS2812`)
 - **Transmisor**: Genera pulsos específicos para `0` y `1` lógicos.
-- **`ImageControl`**: Combina la imagen base (`ROManimation`) y barras de necesidad (`needcomparator`).
-- **Animaciones**: Alterna frames cada ciertos ciclos.
+- **`ImageControl`**: Combina la imagen base (ROManimation) y barras de necesidad (needcomparator).
+- **Animaciones**: Alterna frames cada ciertos ciclos direccionados por adress.
 
 #### 3.5.2. Display de 7 segmentos
 - `visualizacion` muestra:
@@ -298,27 +300,25 @@ Calcula si el Tamagotchi está “cansado”, “desnutrido”, “descuidado”
 - **Negative bonus**: -5 puntos si 2+ necesidades están en 0.
 - **Límite**: `0 ≤ puntuacion ≤ 9999`.
 
-### 3.7. Debounce
-- Elimina rebotes en botones (~50 ms).
-
 ---
 ## 4. Prototipo y Validaciones
 
 ### 4.1. Pruebas en Simulación
-- **`controlprincipal`**: Cambios en necesidades al presionar botones.
-- **`timecontrol`**: Validación de `newtime` en cada velocidad.
-- **`Transmisor`**: Verificación de pulsos de salida.
-- **`ultrasonido`**: Simulación de `echo` para activar `interaccion`.
+- **controlprincipal**: Cambios en necesidades al presionar botones.
+- **timecontrol**: Validación de `newtime` en cada velocidad (x1...x100).
+- **Transmisor**: Verificación de pulsos de salida.
+- **ultrasonido**: Simulación de echo para activar interaccion.
 
 ### 4.2. Implementación en FPGA
 - **Pines asignados a:**
-  - **Entradas:** `botones`, `sensores` (`echo`, `trig`, `claridad`).
-  - **Salidas:** `WS2812`, `display 7 segmentos`, `ledclaridad`, `ledinteraccion`.
+  - **Entradas:** botones (7 entradas), sensores (echo, trig, claridad).
+  - **Salidas:** WS2812 (1 wire data), display 7 segmentos (8 ánodos + 7 bits de segmentos), ledclaridad, ledinteraccion.
+[![Video de Implementación en FPGA](implementación.png)]
 
 ### 4.3. Posibles Fallas y Recomendaciones
 - **Sensor ultrasónico:** Cableado corto para evitar ruido.
 - **Pantallas WS2812:** Ajuste preciso de pulsos.
-- **Botones:** Uso correcto de `debounce` y `pull-ups/downs`.
+- **Botones:** Uso correcto de debounce y pull-ups/downs.
 
 ---
 ## 5. Trabajo en Equipo y Gestión del Proyecto
