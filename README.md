@@ -214,7 +214,7 @@ if(pixelactivo == 1)begin
 
 ## 2. Arquitectura del Sistema
 
-### 2.1. Módulo Top (Tamaguchi.v)
+### 2.1. Módulo Top (Tamagotchi.v)
 Reúne las señales de:
 
 - **Entradas:** clk, botones, echo, claridad.
@@ -254,7 +254,7 @@ El Tamagotchi se representa como un supermódulo con submódulos internos:
   - botontest: Fuerza estados y necesidades, útil para depurar.
   - botonreset: Restablece todo tras ~5s pulsado.
 
-### 3.2. Lógica de Estado (StateLogic)
+### 3.2. Lógica de Estado 
 Calcula si el Tamagotchi está “cansado”, “desnutrido”, “descuidado”, etc., basado en comparaciones (<5, <3, <2) y otroga un parámetro estado [3:0]:
 
 - **Ejemplo:**
