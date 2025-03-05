@@ -210,6 +210,143 @@ if(pixelactivo == 1)begin
 #### Debounce:
 * Filtra el ruido de los botones físicos
 
+## 2. Arquitectura del Sistema
+
+### 2.1. Módulo Top (Tamaguchi.v)
+Reúne las señales de:
+
+- **Entradas:** `clk`, `botones`, `echo`, `claridad`.
+- **Salidas:** `pinout` (si se usa transmisión serial), `anodos`, `display`, `ledclaridad`, `ledinteraccion`, `trig`.
+
+Instancia submódulos como `Transmisor`, `ImageControl`, `StateLogic`, `controlprincipal`, `timecontrol`, `visualizacion`, etc. Esta pieza central conecta:
+
+- **Botones** → `debounce` → `controlprincipal`
+- **Sensores** (`echo`, `claridad`) → `ultrasonido` y directamente a `controlprincipal`
+- **Necesidades y estado** se pasan a `StateLogic` → se obtiene `estado[3:0]`.
+- **Imagen base** desde `ROManimation` → `mux64` → `ImageControl`, junto con la “banda” de necesidades (`needcomparator`) → se envían al `Transmisor`.
+
+### 2.2. Diagrama de Bloques / Caja Negra
+El Tamagotchi se representa como un supermódulo con submódulos internos:
+
+- **`controlprincipal`**: Ajusta humedad, nutrición, energía, etc.
+- **`StateLogic`**: Determina estado final (código 4 bits).
+- **`controlpuntuacion`**: Actualiza el marcador.
+- **`timecontrol`**: Genera pulsos de paso de tiempo.
+- **`ultrasonido`**: Mide distancias.
+- **`visualizacion`**: Multiplexa displays para puntuación y velocidad.
+- **`Transmisor` + `ImageControl` + `needcomparator` + `ROManimation`**: Manejan la lógica de gráficos en `WS2812`.
+
+---
+## 3. Funcionamiento e Implementación
+
+### 3.1. Control Principal
+- Necesidades: `humedad`, `nutricion`, `energia`, `mantenimiento`, `cortado` (3 bits cada una, rango 0–7).
+- Disminuyen automáticamente según contadores (ej. cada N pasos de `passsecond`).
+- **Ejemplos:**
+  - Energía -1 cada 7 minutos (a `X1`), se acelera en las demás velocidades.
+  - Nutrición -1 cada 5 minutos.
+- **Botones:**
+  - `botonregar`: Sube humedad.
+  - `botonabonar`: Sube nutrición.
+  - `botonreposar`: El Tamagotchi duerme si `energia < 7` y no hay luz ni interacción.
+  - `botontest`: Fuerza estados y necesidades, útil para depurar.
+  - `botonreset`: Restablece todo tras ~5s pulsado.
+
+### 3.2. Lógica de Estado (`StateLogic`)
+Calcula si el Tamagotchi está “cansado”, “desnutrido”, “descuidado”, etc., basado en comparaciones:
+
+- **Ejemplo:**
+  - `BIEN = 4'b0000` si todas las necesidades ≥5.
+  - `MUERTE = 4'b1010` si 4+ necesidades están en 0.
+
+### 3.3. Sensores
+
+#### 3.3.1. Sensor Ultrasónico (`ultrasonido`)
+- FSM con estados `SENDTRIG`, `WAIT`, `RECIEVEECHO`, `DELAY`.
+- **Funcionamiento:**
+  - `SENDTRIG`: Envío de pulso de 10 µs (`trig`).
+  - `RECIEVEECHO`: Mide cuántos ciclos `clk` dura `echo` en alto.
+  - Si `countecho <= 25000`, `interaccion <= 1` (objeto cerca).
+
+#### 3.3.2. Sensor de Luz
+- Implementado externamente con un comparador.
+- **Salida:** `claridad = 1` si hay luz (`foto-resistencia < 1kΩ`), `0` en oscuridad.
+- **Integración:** El Tamagotchi no descansa si `claridad == 1`.
+
+### 3.4. Control de Tiempo (`timecontrol`)
+- Define velocidad (`X1`, `X2`, `X5`, `X10`, `X50`, `X100`).
+- Ajusta cuántos ciclos de `clk` (50 MHz) se requieren para invertir `newtime`.
+- El usuario cambia la velocidad con `botonpass`.
+
+### 3.5. Visualización
+
+#### 3.5.1. Matrices LED (`WS2812`)
+- **`Transmisor`**: Genera pulsos específicos para `0` y `1` lógicos.
+- **`ImageControl`**: Combina la imagen base (`ROManimation`) y barras de necesidad (`needcomparator`).
+- **Animaciones**: Alterna frames cada ciertos ciclos.
+
+#### 3.5.2. Display de 7 segmentos
+- `visualizacion` muestra:
+  - Velocidad (`01`, `02`, `05`, `10`, `50`, `99` para `X1`...`X100`).
+  - Puntuación (`hasta 9999`).
+- Conversión binario a BCD (`miles`, `centenas`, `decenas`, `unidades`).
+
+### 3.6. Control de Puntuación
+- **Aumento**: +1 si una necesidad sube ≥6.
+- **Bonus**: +5 si `humedad + nutricion + energia + mantenimiento + cortado == 35`.
+- **Penalización**: -1 punto cada ~1s si alguna necesidad ≤2.
+- **Negative bonus**: -5 puntos si 2+ necesidades están en 0.
+- **Límite**: `0 ≤ puntuacion ≤ 9999`.
+
+### 3.7. Debounce
+- Elimina rebotes en botones (~50 ms).
+
+---
+## 4. Prototipo y Validaciones
+
+### 4.1. Pruebas en Simulación
+- **`controlprincipal`**: Cambios en necesidades al presionar botones.
+- **`timecontrol`**: Validación de `newtime` en cada velocidad.
+- **`Transmisor`**: Verificación de pulsos de salida.
+- **`ultrasonido`**: Simulación de `echo` para activar `interaccion`.
+
+### 4.2. Implementación en FPGA
+- **Pines asignados a:**
+  - **Entradas:** `botones`, `sensores` (`echo`, `trig`, `claridad`).
+  - **Salidas:** `WS2812`, `display 7 segmentos`, `ledclaridad`, `ledinteraccion`.
+
+### 4.3. Posibles Fallas y Recomendaciones
+- **Sensor ultrasónico:** Cableado corto para evitar ruido.
+- **Pantallas WS2812:** Ajuste preciso de pulsos.
+- **Botones:** Uso correcto de `debounce` y `pull-ups/downs`.
+
+---
+## 5. Trabajo en Equipo y Gestión del Proyecto
+- **Plan de desarrollo:**
+  1. Implementación de necesidades.
+  2. Sensores y tiempo.
+  3. Visualización y puntuación.
+  4. Integración final.
+
+---
+## 6. Documentación
+- **Estructura del repositorio:**
+  - `/src`: Archivos `.v`.
+  - `/sim`: Testbenches.
+  - `/docs`: Diagramas e informe.
+- **Legibilidad:**
+  - Variables descriptivas.
+  - Comentarios en cada archivo.
+
+---
+## 7. Conclusiones
+- Tamagotchi funcional con múltiples necesidades y estados.
+- Sensores (`ultrasonido`, `luz`) para mayor realismo.
+- Arquitectura modular eficiente.
+- Posibles mejoras: más animaciones, memoria no volátil, modo de “sueño” avanzado.
+
+---
+_Proyecto Tamagotchi FPGA - Simulación de una mascota virtual en hardware._
 
 
 
