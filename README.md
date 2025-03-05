@@ -161,7 +161,43 @@ endmodule
 * Genera un pulso (newtime o passsecond) con diferentes velocidades (X1, X2, X5, X10, X50, X100).
 * Esto permite acelerar o desacelerar el juego.
 #### Pantallas y Animación: 
-* Transmisor (Transmisor.v) y ImageControl (ImageControl.v): Codifican los bits de color (24 bits/píxel) para las matrices LED.
+* Transmisor (Transmisor.v) y ImageControl (ImageControl.v): Codifican los bits de color rgb  (24 bits/píxel) para las matrices LED.
+Para cada estado se tiene un color rgb expreado en hexadecimal que se asigna cuando el pixel cargado tiene que estar encendido
+````
+if(pixelactivo == 1)begin
+					case(estado)
+							4'b0000:begin
+								color <= 24'h7bdf68;
+							end
+							4'b0001:begin
+								color <= 24'h28ff00;
+							end
+							4'b0010:begin
+								color <= 24'hf3ff00;
+							end
+							4'b0011:begin
+								color <= 23'he9ffa3;
+							end
+							4'b0100:begin
+								color <= 24'hbcf408;
+							end
+							4'b0101:begin
+								color <= 24'h00ff00;
+							end
+							4'b0110:begin
+								color <= 24'h25ff00;
+							end
+							4'b0111:begin
+								color <= 24'h987807;
+							end
+							4'b1000:begin
+								color <= 24'hef9cf9;
+							end
+							4'b1001:begin
+								color <= 24'h8488ff;
+							end
+					endcase
+````
 * Los multiplexores  (mux64, mux24) y needcomparator: Seleccionan si pintar la imagen base o las barras de necesidades.
 * ROManimation: Guarda patrones de 64 bits que se combinan para la animación.
 #### Visualización en 7 Segmentos:
