@@ -4,8 +4,8 @@
 * Duvan Tique
 * Diego Vitoviz
 
-## Descripción General y Especificaciones de los Sistemas
-### Introducción 
+## 1. Descripción General y Especificaciones de los Sistemas
+### 1.1 Introducción 
 El proyecto “Tamagotchi” emula una mascota virtual que reacciona a las atenciones del usuario. Se implementa en una FPGA (por ejemplo, Cyclone IV EP4CE6E22C8N) e incluye:
 * Botones físicos: Para alimentar, regar, podar, reposar, activar modo prueba, acelerar el tiempo y resetear el juego.
 * Sensores:
@@ -19,13 +19,13 @@ El Tamagotchi mantiene cinco necesidades: humedad, nutrición, energía, manteni
 
 ![Documentación](https://github.com/user-attachments/assets/0abf3178-ab55-4410-8a3d-d30f4a69f851)
 
-### Subsistemas Esenciales
+### 1.2. Subsistemas Esenciales
 #### Control Principal:
 * Coordina el decremento automático de necesidades con el paso del tiempo.
 * Maneja la lógica de botones (regar, abonar, podar, reposar, test, reset).
 * Actualiza niveles en función de interacción (sensor ultrasónico) y claridad (sensor de luz).
 #### Lógica de Estados (Maquina de estados):
-* Determina si el Tamagotchi del la planta está “bien”, “Insolada”, “Desnutrida”, “Muerta”, etc., basándose en las necesidades recibidas de controlprincipal.
+* Determina si el Tamagotchi de la planta está “bien”, “Insolada”, “Desnutrida”, “Muerta”, etc., basándose en las necesidades recibidas de controlprincipal.
   Para verificar cada uno de los estados correspondiente para la maquina de estados se realizo el siguiente test bench para probar cada una de los posibilidades
 ````
 module MaquinaEstados_TB;
@@ -159,7 +159,7 @@ endmodule
 * Modulo sensor fotoresistencia: Genera una señal digital(1 = luz, 0 = oscuridad).
 #### Control de Tiempo (timecontrol):
 * Genera un pulso (newtime o passsecond) con diferentes velocidades (X1, X2, X5, X10, X50, X100).
-* Esto permite acelerar o desacelerar el juego.
+* Esto permite acelerar o desacelerar el incremento o decremento de la planta.
 #### Pantallas y Animación: 
 * Transmisor (Transmisor.v) y ImageControl (ImageControl.v): Codifican los bits de color rgb  (24 bits/píxel) para las matrices LED.
 Para cada estado se tiene un color rgb expreado en hexadecimal que se asigna cuando el pixel cargado tiene que estar encendido
@@ -208,7 +208,7 @@ if(pixelactivo == 1)begin
 * Descuenta puntos si varias necesidades están ≤2, con penalizaciones adicionales si llegan a 0.
 * Aplica bonus (+5) si todas suman 35.
 #### Debounce:
-* Filtra el ruido de los botones físicos
+* Filtra el ruido de los botones físicos.
 
 ## 2. Arquitectura del Sistema
 
@@ -221,7 +221,7 @@ Reúne las señales de:
 Instancia submódulos como Transmisor, ImageControl, StateLogic, controlprincipal, timecontrol, visualizacion, etc. Esta pieza central conecta:
 
 - **Botones** → debounce → controlprincipal
-- **Sensores** (echo, claridad`) → ultrasonido y directamente a controlprincipal
+- **Sensores** (echo, claridad) → ultrasonido y directamente a controlprincipal
 - **Necesidades y estado** se pasan a StateLogic → se obtiene estado[3:0].
 - **Imagen base** desde ROManimation → mux64 → ImageControl, junto con la “banda” de necesidades (needcomparator) → se envían al Transmisor.
 
@@ -240,20 +240,20 @@ El Tamagotchi se representa como un supermódulo con submódulos internos:
 ## 3. Funcionamiento e Implementación
 
 ### 3.1. Control Principal
-- Necesidades: `humedad`, `nutricion`, `energia`, `mantenimiento`, `cortado` (3 bits cada una, rango 0–7).
-- Disminuyen automáticamente según contadores (ej. cada N pasos de `passsecond`).
+- Necesidades: humedad, nutricion, energia, mantenimiento, cortado (3 bits cada una, rango 0–7).
+- Disminuyen automáticamente según contadores.
 - **Ejemplos:**
-  - Energía -1 cada 7 minutos (a `X1`), se acelera en las demás velocidades.
+  - Energía -1 cada 7 minutos (a `X1`), se acelera en las demás velocidades con los factores de miltiplicación.
   - Nutrición -1 cada 5 minutos.
 - **Botones:**
-  - `botonregar`: Sube humedad.
-  - `botonabonar`: Sube nutrición.
-  - `botonreposar`: El Tamagotchi duerme si `energia < 7` y no hay luz ni interacción.
-  - `botontest`: Fuerza estados y necesidades, útil para depurar.
-  - `botonreset`: Restablece todo tras ~5s pulsado.
+  - botonregar: Sube humedad.
+  - botonabonar: Sube nutrición.
+  - botonreposar: El Tamagotchi duerme si `energia < 7` y no hay luz ni interacción.
+  - botontest: Fuerza estados y necesidades, útil para depurar.
+  - botonreset: Restablece todo tras ~5s pulsado.
 
-### 3.2. Lógica de Estado (`StateLogic`)
-Calcula si el Tamagotchi está “cansado”, “desnutrido”, “descuidado”, etc., basado en comparaciones:
+### 3.2. Lógica de Estado (StateLogic)
+Calcula si el Tamagotchi está “cansado”, “desnutrido”, “descuidado”, etc., basado en comparaciones (<5, <3, <2) y otroga un parámetro estado [3:0]:
 
 - **Ejemplo:**
   - `BIEN = 4'b0000` si todas las necesidades ≥5.
@@ -261,11 +261,11 @@ Calcula si el Tamagotchi está “cansado”, “desnutrido”, “descuidado”
 
 ### 3.3. Sensores
 
-#### 3.3.1. Sensor Ultrasónico (`ultrasonido`)
-- FSM con estados `SENDTRIG`, `WAIT`, `RECIEVEECHO`, `DELAY`.
+#### 3.3.1. Sensor Ultrasónico (ultrasonido)
+- FSM con estados SENDTRIG, WAIT, RECIEVEECHO, DELAY.
 - **Funcionamiento:**
-  - `SENDTRIG`: Envío de pulso de 10 µs (`trig`).
-  - `RECIEVEECHO`: Mide cuántos ciclos `clk` dura `echo` en alto.
+  - SENDTRIG: Envío de pulso de 10 µs (trig).
+  - RECIEVEECHO: Mide cuántos ciclos clk dura echo en alto.
   - Si `countecho <= 25000`, `interaccion <= 1` (objeto cerca).
 
 #### 3.3.2. Sensor de Luz
@@ -274,14 +274,14 @@ Calcula si el Tamagotchi está “cansado”, “desnutrido”, “descuidado”
 - **Integración:** El Tamagotchi no descansa si `claridad == 1`.
 
 ### 3.4. Control de Tiempo (`timecontrol`)
-- Define velocidad (`X1`, `X2`, `X5`, `X10`, `X50`, `X100`).
-- Ajusta cuántos ciclos de `clk` (50 MHz) se requieren para invertir `newtime`.
-- El usuario cambia la velocidad con `botonpass`.
+- Define velocidad (X1, X2, X5, X10, X50, X100).
+- Ajusta cuántos ciclos de clk (50 MHz) se requieren para invertir newtime.
+- El usuario cambia la velocidad con botonpass.
 
 ### 3.5. Visualización
 
 #### 3.5.1. Matrices LED (`WS2812`)
-- **`Transmisor`**: Genera pulsos específicos para `0` y `1` lógicos.
+- **Transmisor**: Genera pulsos específicos para `0` y `1` lógicos.
 - **`ImageControl`**: Combina la imagen base (`ROManimation`) y barras de necesidad (`needcomparator`).
 - **Animaciones**: Alterna frames cada ciertos ciclos.
 
