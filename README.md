@@ -315,10 +315,8 @@ Calcula si el Tamagotchi está “cansado”, “desnutrido”, “descuidado”
   - **Salidas:** WS2812 (1 wire data), display 7 segmentos (8 ánodos + 7 bits de segmentos), ledclaridad, ledinteraccion.
 ### Video de la implementación
 
-<video controls>
-  <source src="video_implementacion.mp4" type="video/mp4">
-  Tu navegador no soporta la reproducción de videos.
-</video>
+[Ver video de la implementación](docs/video_implementacion.mp4)
+
 
 ### 4.3. Posibles Fallas y Recomendaciones
 - **Sensor ultrasónico:** Cableado corto para evitar ruido.
@@ -328,31 +326,21 @@ Calcula si el Tamagotchi está “cansado”, “desnutrido”, “descuidado”
 ---
 ## 5. Trabajo en Equipo y Gestión del Proyecto
 - **Plan de desarrollo:**
-  1. Implementación de necesidades.
-  2. Sensores y tiempo.
-  3. Visualización y puntuación.
-  4. Integración final.
+  1. Implementación de necesidades (Diego).
+  2. Sensores y tiempo (Diego).
+  3. Visualización y puntuación(Paula).
+  4. Integración final (Duvan).
 
----
-## 6. Documentación
-- **Estructura del repositorio:**
-  - `/src`: Archivos `.v`.
-  - `/sim`: Testbenches.
-  - `/docs`: Diagramas e informe.
-- **Legibilidad:**
-  - Variables descriptivas.
-  - Comentarios en cada archivo.
+## 6. Mejoras futuras:
+- Añadir más animaciones o frames en la ROM.
+- Incluir retención de estado en memoria no volátil.
+- Implementar un modo de “sueño” más complejo (pausas de decremento, etc.).
 
----
 ## 7. Conclusiones
 - Tamagotchi funcional con múltiples necesidades y estados.
-- Sensores (`ultrasonido`, `luz`) para mayor realismo.
+- Sensores (ultrasonido, luz).
 - Arquitectura modular eficiente.
 - Posibles mejoras: más animaciones, memoria no volátil, modo de “sueño” avanzado.
-
----
-_Proyecto Tamagotchi FPGA - Simulación de una mascota virtual en hardware._
-
 
 
 
